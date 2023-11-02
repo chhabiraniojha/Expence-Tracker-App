@@ -6,17 +6,24 @@ function Signup() {
   const [password,setPassword]=useState("");
 
  const handleSubmit=async (e)=>{
+
   e.preventDefault();
-  await axios.post('/api/users/signup',{
-    name:name,
-    email:email,
-    password:password
-  })
+
+  const user=await axios.get(`/api/users/${email}`)
+  if(user.data){
+    alert("user already exists");
+    return
+  }else{
+    await axios.post('/api/users/signup',{
+      name:name,
+      email:email,
+      password:password
+    })
+    alert("registered successfully")
+  }
   setName("");
   setEmail("");
   setPassword("");
-  alert("registered successfully")
-  
  }
 
   return (

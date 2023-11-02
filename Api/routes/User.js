@@ -5,5 +5,6 @@ const router=express.Router();
 
 
 router.post("/signup",userController.signup)
+router.get("/:email",userController.getUser)
 
 module.exports=router;

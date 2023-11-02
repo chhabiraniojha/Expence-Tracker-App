@@ -10,3 +10,21 @@ exports.signup=async (req,res,next)=>{
       }
 
 }
+
+exports.getUser=async (req,res,next)=>{
+      // checking the email is already exits or not
+
+      const email=req.params.email;
+      try {
+        const user= await Users.findAll({
+          where: {
+            email: email
+          }
+        });
+        user.length>0?res.json(true):res.json(false)
+        
+      } catch (error) {
+        console.log(error)
+      }
+
+}
