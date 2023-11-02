@@ -8,6 +8,28 @@ exports.signup=async (req,res,next)=>{
       } catch (error) {
         console.log(error)
       }
+}
+
+exports.signin=async (req,res,next)=>{
+  const {email,password}=req.body;
+  try {
+    const user=await Users.findAll({
+      where: {
+        email: email
+      }
+    })
+    if(user.length>0){
+     
+      if(user[0].password==password){
+        return res.status(200).json("success loged in")
+      }else{
+        return res.json("password mismatch")
+      }
+    }
+    return res.status(200).json('user not found')
+  } catch (error) {
+    res.json(error)
+  }
 
 }
 
