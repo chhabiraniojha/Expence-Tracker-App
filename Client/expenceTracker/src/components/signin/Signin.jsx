@@ -6,22 +6,28 @@ function Signin() {
   const [password,setPassword]=useState("");
   const [errMessage,setErrMessage]=useState(null);
 
- const handleSubmit=async (e)=>{
+ const handleSubmit=(e)=>{
 
   e.preventDefault();
   const userDetails={email:email,password:password}
   setErrMessage(null)
-  const user=await axios.post(`/api/users/signin`,userDetails)
-  if(user.data=="success loged in"){
+  axios.post(`/api/users/signin`,userDetails)
+  .then(res=>{
+    if(res.status==200){
     
-    alert("logged in successfully")
-    
-  }else if(user.data=="password mismatch"){
-     setErrMessage(user.data)
-     
-  }else{
-     setErrMessage(user.data)
-  }
+      alert("logged in successfully")
+      
+    }
+  })
+  .catch(err=>{
+    if(err.response.status==401){
+      setErrMessage(err.response.data)
+      
+   }else{
+      setErrMessage(err.response.data)
+   }
+  })
+  
   
  }
 
