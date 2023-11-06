@@ -1,6 +1,8 @@
 import React from 'react'
+import { useExpence } from '../context/ExpenceContext'
 
-function Expence({expence,removeExpence}) {
+function Expence({expence}) {
+    const {removeExpence}=useExpence();
 
     function handleClick(){
         removeExpence(expence.id)
