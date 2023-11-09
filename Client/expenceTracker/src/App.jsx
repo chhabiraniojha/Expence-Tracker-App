@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Navbar from './components/navbar/Navbar'
 import { Route, Routes } from 'react-router-dom'
 import Home from './components/home/Home.jsx'
 import Expences from './components/expences/Expences.jsx'
 import Signin from './components/signin/Signin.jsx'
 import Signup from './components/signup/Signup.jsx'
-import { LoginProvider } from './components/context/LoginContext.js';
+import { LoginProvider } from './components/context/userContext.js';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute.js';
 import { Navigate } from 'react-router-dom';
 
@@ -14,37 +14,55 @@ import { Navigate } from 'react-router-dom';
 
 
 function App() {
-  const token=localStorage.getItem('token')
-  const [user, setUser] = useState (token? true:false)
-  
-  // console.log(user)
+
+  const [user, setUser] = useState({})
 
 
-  function Login() {
-    setUser(true)
-  }
-  function Logout() {
-    setUser(false)
-  }
+  const Login = useCallback(() => {
+    setUser(prev => (
+      { ...prev, isLoggedIn: !prev.isLoggedIn }
+    ))
+  }, [])
 
+  const Logout = useCallback(() => {
+    setUser(prev => (
+      { ...prev, isLoggedIn: !prev.isLoggedIn }
+    ))
+  }, [])
+
+
+
+  useEffect(() => {
+
+    // console.log(user)
+    const getData = async () => {
+      const token = localStorage.getItem('token')
+
+      if (token) {
+        const response = await axios.get('/api/users', { headers: { Authorization: token } })
+        setUser(response.data.userDetails)
+      } else {
+        setUser({})
+      }
+    }
+    getData()
+  }, [setUser, Login, Logout]);
 
   return (
-
-
-
     <>
       <div>
-        <LoginProvider value={{ user,Login, Logout }}>
+        <LoginProvider value={{ user, setUser, Login, Logout }}>
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/contactus" element={<Home />} />
-            <Route path="/expences" element={
-              <ProtectedRoute user={user}>
-                <Expences />
-              </ProtectedRoute>} />
-            <Route path="/signin" element={<Signin Login={Login} />} />
-            <Route path="/signup" element={<Signup/>} />
+
+            {/* // <ProtectedRoute user={user.isLoggedIn:}>
+              //   <Expences />
+              // </ProtectedRoute>} /> */}
+            <Route path="/signin" element={!user.isLoggedIn ? <Signin /> : <Navigate to="/" />} />
+            <Route path="/expences" element={user.isLoggedIn ? <Expences /> : <Signin/>}></Route>
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </LoginProvider>
       </div>
@@ -57,4 +75,3 @@ function App() {
 export default App
 
 
-// export default protectedRoute;

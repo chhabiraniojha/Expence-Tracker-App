@@ -12,7 +12,7 @@ function Expence({expence}) {
         <div>
             <div className='border borded-2 border-yellow-200 bg-yellow-200 p-8 m-3'>
                 <li>
-                    <div p-6 >
+                    <div >
                         <h5 className='p-2'>Expence Amount:{expence.expenceAmount}</h5>
                         <h5 className='p-2'>Expence Description:{expence.expenceDescription}</h5>
                         <h5 className='p-2'>Expence Category:{expence.expenceCategory}</h5>

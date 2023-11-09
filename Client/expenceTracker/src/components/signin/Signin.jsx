@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useLogin } from '../context/LoginContext';
+import { useLogin } from '../context/userContext';
 
 
 function Signin() {
 
-  const {Login}=useLogin();
+  const {user,setUser,Login}=useLogin();
 
   // console.log(Login)
   const Navigate=useNavigate();
@@ -21,13 +21,16 @@ function Signin() {
     setErrMessage(null)
     axios.post(`/api/users/signin`, userDetails)
       .then(res => {
-        
+        console.log(res)
         if (res.status == 200) {
           localStorage.setItem("token",res.data.token)
           alert("logged in successfully")
-          Login();
+          
           Navigate('/expences')
-
+          
+          setUser(res.data.data)
+          Login();
+          
         }
       })
       .catch(err => {
@@ -41,6 +44,7 @@ function Signin() {
 
 
   }
+  
 
   return (
     <div className='max-h-full bg-blue-300'>

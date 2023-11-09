@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const ProtectedRoute = ({ user, children }) => {
+  console.log(user)
 
     const navigate = useNavigate();
       

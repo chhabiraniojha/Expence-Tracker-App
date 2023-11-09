@@ -31,7 +31,7 @@ exports.signin = async (req, res, next) => {
       bcrypt.compare(password, user[0].password, function (err, result) {
         // result == true
         if (result) {
-          return res.status(200).json({message:"success loged in",token:generateAccessToken(user[0].id,user[0].name)})
+          return res.status(200).json({data:user[0],message:"success loged in",token:generateAccessToken(user[0].id,user[0].name)})
         } else {
           return res.status(401).json("password mismatch")
         }
@@ -62,6 +62,18 @@ exports.getUser = async (req, res, next) => {
 
   } catch (error) {
     console.log(error)
+  }
+
+}
+
+exports.getUserInfo=async (req,res,next)=>{
+
+  try {
+    const user=await Users.findByPk(req.user)
+    
+    res.status(200).json({userDetails:{id:user.id,name:user.name,email:user.email,isPremium:user.isPremium,isLoggedIn:true}})
+  } catch (error) {
+    res.json(error)
   }
 
 }

@@ -42,7 +42,7 @@ function Expences() {
                     {/* expences */}
                     <ExpenceForm />
                     <div className=''>
-                        <div  >
+                        <div >
                             <ul className='flex flex-1 flex-wrap p-4'>
                                 {expences.map((expence) => (
                                     <Expence key={expence.id} expence={expence} />

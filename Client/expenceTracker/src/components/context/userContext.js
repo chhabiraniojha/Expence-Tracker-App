@@ -2,13 +2,15 @@ import { createContext,useContext } from "react";
 
 
 export const LoginContext=createContext({
-    // todos:[
-    //     {
-    //         id:1,
-    //         todo:"todo msg",
-    //         completed:false
-    //     }
-    // ],
+    user:
+        {
+            id:1,
+            name:'suvransu',
+            email:'chhabiraniojha@gmail.com',
+            isPremium:false,
+            isLoggedIn:false
+        }
+    ,
     Login:()=>{},
     
     Logout:()=>{},
