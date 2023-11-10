@@ -6,7 +6,7 @@ const router=express.Router();
 
 router.post('/addExpence',userAuthentication,expenceController.addExpence)
 router.get('/',userAuthentication,expenceController.getExpence)
-router.delete('/:id',expenceController.deleteExpence)
+router.delete('/:id',userAuthentication,expenceController.deleteExpence)
 
 
 module.exports=router;

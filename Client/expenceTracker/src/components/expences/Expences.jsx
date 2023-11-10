@@ -15,7 +15,8 @@ function Expences() {
   
 
     async function removeExpence(id) {
-        const response = await axios.delete(`/api/expence/${id}`);
+        const token=localStorage.getItem('token');
+        const response = await axios.delete(`/api/expence/${id}`,{headers:{Authorization:token}});
         if (response.status == 200) {
             setExpences((prevExpences) => {
                 return prevExpences.filter((prevExpence) => (prevExpence.id != id))

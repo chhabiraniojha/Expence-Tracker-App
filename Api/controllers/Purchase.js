@@ -21,7 +21,7 @@ exports.purchasePremium = async (req, res, next) => {
          }
 
          try {
-            await Order.create({ orderId: order.id, status: "PENDING", userId: req.user })
+            await Order.create({ orderId: order.id, status: "PENDING", userId: req.user.id })
             return res.status(200).json({ order, key_id: rzp.key_id })
          } catch (error) {
             return res.json(err);
@@ -37,7 +37,7 @@ exports.purchasePremium = async (req, res, next) => {
 exports.updateTransactionStatus = async (req, res, nextx) => {
    const { payment_id, order_id,status } = req.body;
    
-   const id = req.user;
+   const id = req.user.id;
    try {
       if(status){
          await Order.update({ paymentId: payment_id, status: 'SUCCESS' }, {

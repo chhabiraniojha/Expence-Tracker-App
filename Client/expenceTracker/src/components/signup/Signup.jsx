@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 
 function Signup() {
   const [name,setName]=useState("");
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
+  const navigate=useNavigate();
 
  const handleSubmit=async (e)=>{
 
@@ -20,6 +22,7 @@ function Signup() {
       password:password
     })
     alert("registered successfully")
+    navigate('/signin')
   }
   setName("");
   setEmail("");
@@ -32,7 +35,7 @@ function Signup() {
         <div className='  rounded-md p-8  shadow-xl'>
         <form onSubmit={handleSubmit}>
         <div className=''>
-        <h1 className='font-medium font-serif text-center text-3xl'>Sign Up</h1>
+        <h1 className='font-bold font-serif text-center text-3xl'>Expence Tracker</h1>
         </div>
             <div className='text-2xl m-4'>
                 <label  className='text' htmlFor='name'>Enter Your Name:</label><br></br>
@@ -48,7 +51,7 @@ function Signup() {
                 value={password} className='rounded-md' required />
             </div>
             <div className='text-2xl text-center'>
-              <button type="submit" className=' bg-sky-800 p-1 px-5 rounded-lg text-white '>Submit</button>
+              <button type="submit" className=' bg-sky-800 p-1 px-5 rounded-lg text-white '>Sign Up</button>
             </div>
         </form>    
         </div>

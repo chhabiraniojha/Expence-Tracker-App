@@ -8,6 +8,8 @@ import Signup from './components/signup/Signup.jsx'
 import { LoginProvider } from './components/context/userContext.js';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute.js';
 import { Navigate } from 'react-router-dom';
+import LeaderBoard from './components/leaderBoard/LeaderBoard.jsx'
+import ForgottenPassword from './components/forgottenPassword/ForgottenPassword.jsx';
 
 
 
@@ -61,8 +63,11 @@ function App() {
               //   <Expences />
               // </ProtectedRoute>} /> */}
             <Route path="/signin" element={!user.isLoggedIn ? <Signin /> : <Navigate to="/" />} />
-            <Route path="/expences" element={user.isLoggedIn ? <Expences /> : <Signin/>}></Route>
+            <Route path="/expences" element={user.isLoggedIn ? <Expences /> : <Signin/>} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/leaderboard" element={<LeaderBoard />} />
+            <Route path="/forgotpassword" element={<ForgottenPassword />} />
+
           </Routes>
         </LoginProvider>
       </div>

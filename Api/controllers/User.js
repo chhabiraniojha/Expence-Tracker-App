@@ -69,7 +69,7 @@ exports.getUser = async (req, res, next) => {
 exports.getUserInfo=async (req,res,next)=>{
 
   try {
-    const user=await Users.findByPk(req.user)
+    const user=await Users.findByPk(req.user.id)
     
     res.status(200).json({userDetails:{id:user.id,name:user.name,email:user.email,isPremium:user.isPremium,isLoggedIn:true}})
   } catch (error) {
