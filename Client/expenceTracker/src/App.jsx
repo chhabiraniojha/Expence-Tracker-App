@@ -10,6 +10,7 @@ import ProtectedRoute from './components/protectedRoute/ProtectedRoute.js';
 import { Navigate } from 'react-router-dom';
 import LeaderBoard from './components/leaderBoard/LeaderBoard.jsx'
 import ForgottenPassword from './components/forgottenPassword/ForgottenPassword.jsx';
+import PasswordReset from './components/passwordReset/PasswordReset.jsx';
 
 
 
@@ -67,6 +68,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/leaderboard" element={<LeaderBoard />} />
             <Route path="/forgotpassword" element={<ForgottenPassword />} />
+            <Route path="/password/resetpassword/:id/:token" element={<PasswordReset />} />
 
           </Routes>
         </LoginProvider>

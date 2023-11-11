@@ -9,6 +9,7 @@ const sequelize=require('./util/database')
 const Users=require('./models/User')
 const Expence=require('./models/Expence')
 const Order=require('./models/Order');
+const ForgotPassword=require('./models/ForgotPassword')
 require('dotenv').config()
 
 
@@ -27,6 +28,9 @@ Expence.belongsTo(Users)
 
 Users.hasMany(Order)
 Order.belongsTo(Users)
+
+Users.hasMany(ForgotPassword)
+ForgotPassword.belongsTo(Users)
 
 
 
