@@ -1,34 +1,53 @@
 import React, { useEffect, useState } from 'react'
 import { useLogin } from '../context/userContext';
+import DataTable from 'react-data-table-component'
 
 function LeaderBoard() {
-    const {user}=useLogin();
-    const [leaderBoard,setLeaderBoard]=useState([])
+  const { user } = useLogin();
+  const [leaderBoard, setLeaderBoard] = useState([])
+  const columns = [
 
-    useEffect(()=>{
-      const token=localStorage.getItem('token')
-      axios.get('/api/leaderboard',{headers:{Authorization:token}})
-      .then(res=>{
-        if(res.status==200){
+    {
+      name: <div className='w-full text-lg '>Name</div>,
+      cell: row => <div className='text-lg'>{row.name}</div>,
+      width: '20%',
+      maxWidth: 'auto',
+    },
+    {
+      name: <div className='w-full text-lg'>Total Expence</div>,
+      selector: row => <div className='text-lg'>{row.totalExpence?row.totalExpence:0}</div>
+    }
+
+  ];
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    axios.get('/api/leaderboard', { headers: { Authorization: token } })
+      .then(res => {
+        if (res.status == 200) {
           setLeaderBoard(res.data.data)
         }
       })
-    })
-
+  })
+  console.log(leaderBoard)
   return (
     <div>
-    {user.isPremium?
-      <div>
-    <h1>Leader Board</h1>
-      <ul>
-      {leaderBoard.map((leader)=>(
-        <li>{leader.name}-{leader.totalExpence==null?0:leader.totalExpence}</li>
-      ))}
+      {user.isPremium ?
+        <div>
+          <div>
+            <DataTable
+              title="Your Expence Lists"
+              columns={columns}
+              data={leaderBoard}
+              fixedHeader
+              fixedHeaderScrollHeight="400px"
 
-      </ul>
-      </div> :<div>You are not a premium user</div>
-    }
-     
+              pagination
+            />
+          </div>
+
+        </div> : <div>You are not a premium user</div>
+      }
+
     </div>
   )
 }

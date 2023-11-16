@@ -77,3 +77,23 @@ exports.deleteExpence = async (req, res, next) => {
     console.log(error)
   }
 }
+
+exports.getPaginatedExpence = async (req, res, next) => {
+  const id = req.user.id;
+  const page = req.query.page;
+  const pageLimit = parseInt(req.query.limit);
+  const count = await Expence.count({
+    where: {
+      userId: id
+    }
+  });
+  const expence=await Expence.findAll({
+    where:{
+      userId:id
+    },
+    offset:(page)*pageLimit,
+    limit:pageLimit
+    
+  })
+  res.json({expence,count})
+}

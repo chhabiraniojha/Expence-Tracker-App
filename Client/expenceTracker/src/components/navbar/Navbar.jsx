@@ -81,6 +81,8 @@ function Navbar() {
             </li>
           </ul>
         </div>
+        {user.isLoggedIn && <div className='text-violet-600 text-xl'>hello, {user.name} !</div>}
+        
         <div>
           {!user.isLoggedIn ?
             <div>
@@ -94,7 +96,9 @@ function Navbar() {
             </div>
             :
             <div>
-              <h4>hello {user.name}</h4>
+              
+              <div>
+              
               {!user.isPremium ?
                 <button onClick={handlePurchase} className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>
                   <Link to='#'>
@@ -110,6 +114,8 @@ function Navbar() {
                 localStorage.removeItem('token')
                 navigate('/')
               }} className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Logout</button>
+              </div>
+             
             </div>
 
           }

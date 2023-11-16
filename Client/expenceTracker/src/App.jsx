@@ -11,6 +11,7 @@ import { Navigate } from 'react-router-dom';
 import LeaderBoard from './components/leaderBoard/LeaderBoard.jsx'
 import ForgottenPassword from './components/forgottenPassword/ForgottenPassword.jsx';
 import PasswordReset from './components/passwordReset/PasswordReset.jsx';
+import Test from './components/test/Test.jsx';
 
 
 
@@ -69,6 +70,7 @@ function App() {
             <Route path="/leaderboard" element={<LeaderBoard />} />
             <Route path="/forgotpassword" element={<ForgottenPassword />} />
             <Route path="/password/resetpassword/:id/:token" element={<PasswordReset />} />
+            <Route path="/test" element={<Test/>} />
 
           </Routes>
         </LoginProvider>

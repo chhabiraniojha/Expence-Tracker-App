@@ -7,6 +7,7 @@ const router=express.Router();
 router.post('/addExpence',userAuthentication,expenceController.addExpence)
 router.get('/',userAuthentication,expenceController.getExpence)
 router.delete('/:id',userAuthentication,expenceController.deleteExpence)
+router.get('/pagination',userAuthentication,expenceController.getPaginatedExpence)
 
 
 module.exports=router;
