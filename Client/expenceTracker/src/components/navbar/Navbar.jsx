@@ -79,6 +79,11 @@ function Navbar() {
                 LeaderBoard
               </Link>
             </li>
+            <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
+              <Link to='/report'>
+                Report
+              </Link>
+            </li>
           </ul>
         </div>
         {user.isLoggedIn && <div className='text-violet-600 text-xl'>hello, {user.name} !</div>}

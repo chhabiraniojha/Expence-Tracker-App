@@ -70,7 +70,8 @@ function App() {
             <Route path="/leaderboard" element={<LeaderBoard />} />
             <Route path="/forgotpassword" element={<ForgottenPassword />} />
             <Route path="/password/resetpassword/:id/:token" element={<PasswordReset />} />
-            <Route path="/test" element={<Test/>} />
+            <Route path="/report" element={<Test/>} />
+            
 
           </Routes>
         </LoginProvider>

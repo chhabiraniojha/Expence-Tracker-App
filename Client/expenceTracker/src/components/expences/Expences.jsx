@@ -36,7 +36,7 @@ function Expences() {
     useEffect(() => {
         currentPage.current = 0
         getPaginatedExpence();
-    }, [])
+    }, [addExpence])
 
     const handlePageClick = (e) => {
         // console.log(e.selected)
