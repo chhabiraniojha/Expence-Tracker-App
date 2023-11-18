@@ -1,4 +1,5 @@
 const express=require('express');
+require('dotenv').config()
 const bodyParser=require('body-parser')
 const userRoute=require('./routes/User')
 const expenceRoute=require('./routes/Expence')
@@ -10,7 +11,7 @@ const Users=require('./models/User')
 const Expence=require('./models/Expence')
 const Order=require('./models/Order');
 const ForgotPassword=require('./models/ForgotPassword')
-require('dotenv').config()
+
 
 
 const app=express();
