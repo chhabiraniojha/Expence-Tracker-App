@@ -11,12 +11,12 @@ function Signup() {
 
   e.preventDefault();
 
-  const user=await axios.get(`/api/users/${email}`)
+  const user=await axios.get(`${import.meta.env.VITE_BASE_URL}/users/${email}`)
   if(user.data){
     alert("user already exists");
     return
   }else{
-    await axios.post('/api/users/signup',{
+    await axios.post(`${import.meta.env.VITE_BASE_URL}/users/signup`,{
       name:name,
       email:email,
       password:password

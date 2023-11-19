@@ -20,7 +20,7 @@ function Signin() {
     e.preventDefault();
     const userDetails = { email: email, password: password }
     setErrMessage(null)
-    axios.post(`/api/users/signin`, userDetails)
+    axios.post(`${import.meta.env.VITE_BASE_URL}/users/signin`, userDetails)
       .then(res => {
         console.log(res)
         if (res.status == 200) {

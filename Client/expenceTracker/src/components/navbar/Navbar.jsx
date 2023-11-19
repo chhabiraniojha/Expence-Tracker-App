@@ -12,12 +12,12 @@ function Navbar() {
 
   const handlePurchase = async () => {
     const token = localStorage.getItem('token')
-    const response = await axios.get('/api/purchase/premiummembership', { headers: { Authorization: token } })
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/purchase/premiummembership`, { headers: { Authorization: token } })
     const options = {
       key: response.data.key_id,
       order_id: response.data.order.id,
       handler: async (response) => {
-        await axios.post('/api/purchase/updatetransactionstatus',
+        await axios.post(`${import.meta.env.VITE_BASE_URL}/purchase/updatetransactionstatus`,
           {
             payment_id: response.razorpay_payment_id,
             order_id: response.razorpay_order_id,
@@ -36,7 +36,7 @@ function Navbar() {
     rzp.open()
 
     rzp.on('payment.failed', async (response) => {
-      await axios.post('/api/purchase/updatetransactionstatus',
+      await axios.post(`${import.meta.env.VITE_BASE_URL}/purchase/updatetransactionstatus`,
         {
           payment_id: response.error.metadata.payment_id,
           order_id: response.error.metadata.order_id,

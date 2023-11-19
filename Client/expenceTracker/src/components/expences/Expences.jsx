@@ -24,7 +24,7 @@ function Expences() {
 
     async function removeExpence(id) {
         const token = localStorage.getItem('token');
-        const response = await axios.delete(`/api/expence/${id}`, { headers: { Authorization: token } });
+        const response = await axios.delete(`${import.meta.env.VITE_BASE_URL}/expence/${id}`, { headers: { Authorization: token } });
         if (response.status == 200) {
             setExpences((prevExpences) => {
                 return prevExpences.filter((prevExpence) => (prevExpence.id != id))
@@ -47,7 +47,7 @@ function Expences() {
     }
     const getPaginatedExpence = () => {
         const token = localStorage.getItem("token")
-        axios.get(`/api/expence/pagination?page=${currentPage.current}&limit=${limit.current}`, { headers: { Authorization: token } })
+        axios.get(`${import.meta.env.VITE_BASE_URL}/expence/pagination?page=${currentPage.current}&limit=${limit.current}`, { headers: { Authorization: token } })
             .then(res => {
                 setExpences(res.data.expence)
                 setPageCount(Math.ceil(res.data.count / limit.current))

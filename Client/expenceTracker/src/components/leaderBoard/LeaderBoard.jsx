@@ -21,7 +21,7 @@ function LeaderBoard() {
   ];
   useEffect(() => {
     const token = localStorage.getItem('token')
-    axios.get('/api/leaderboard', { headers: { Authorization: token } })
+    axios.get(`${import.meta.env.VITE_BASE_URL}/leaderboard`, { headers: { Authorization: token } })
       .then(res => {
         if (res.status == 200) {
           setLeaderBoard(res.data.data)

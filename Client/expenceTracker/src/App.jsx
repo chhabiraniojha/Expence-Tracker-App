@@ -18,6 +18,7 @@ import Test from './components/test/Test.jsx';
 
 
 function App() {
+ 
 
   const [user, setUser] = useState({})
 
@@ -43,7 +44,7 @@ function App() {
       const token = localStorage.getItem('token')
 
       if (token) {
-        const response = await axios.get('/api/users', { headers: { Authorization: token } })
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/users`, { headers: { Authorization: token } })
         setUser(response.data.userDetails)
       } else {
         setUser({})

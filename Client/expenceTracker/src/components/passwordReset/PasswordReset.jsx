@@ -11,7 +11,7 @@ function PasswordReset() {
         e.preventDefault();
         
              try {
-                const response=await axios.post(`/api/password/updatepassword/${id}/${token}`,{password})
+                const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/password/updatepassword/${id}/${token}`,{password})
                 if(response.status==201){
                     setPassword("")
                     setMessage(response.data.message)
@@ -25,7 +25,7 @@ function PasswordReset() {
 
     const validateUser = async () => {
         try {
-            const response = await axios.get(`/api/password/resetpassword/${id}/${token}`)
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/password/resetpassword/${id}/${token}`)
             if (response.status == 201) {
                null
             }

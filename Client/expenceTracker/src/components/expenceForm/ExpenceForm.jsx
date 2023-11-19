@@ -9,7 +9,7 @@ function ExpenceForm() {
     async function handleSubmit(e) {
         e.preventDefault();
         const token=localStorage.getItem("token")
-        const response = await axios.post('/api/expence/addExpence',{ expenceAmount, expenceDescription, expenceCategory },{headers:{Authorization:token}})
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/expence/addExpence`,{ expenceAmount, expenceDescription, expenceCategory },{headers:{Authorization:token}})
 
         if (response.status == 200) {
             addExpence({ expenceAmount, expenceDescription, expenceCategory })
