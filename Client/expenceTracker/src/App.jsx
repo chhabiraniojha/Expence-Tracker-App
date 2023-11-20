@@ -60,7 +60,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/contactus" element={<Home />} />
+            {/* <Route path="/contactus" element={<Home />} /> */}
 
             {/* // <ProtectedRoute user={user.isLoggedIn:}>
               //   <Expences />
