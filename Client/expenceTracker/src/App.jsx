@@ -39,7 +39,7 @@ function App() {
 
   useEffect(() => {
 
-    // console.log(user)
+    console.log(user)
     const getData = async () => {
       const token = localStorage.getItem('token')
 
