@@ -64,11 +64,11 @@ function Navbar() {
                 Home
               </Link>
             </li>
-            <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
+            {/* <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
               <Link to='/contactus'>
                 Contact Us
               </Link>
-            </li>
+            </li> */}
             <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
               <Link to='/expences'>
                 Expence
