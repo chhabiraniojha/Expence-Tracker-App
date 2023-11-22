@@ -12,6 +12,7 @@ import LeaderBoard from './components/leaderBoard/LeaderBoard.jsx'
 import ForgottenPassword from './components/forgottenPassword/ForgottenPassword.jsx';
 import PasswordReset from './components/passwordReset/PasswordReset.jsx';
 import Test from './components/test/Test.jsx';
+import History from './components/downloadHistory/History.jsx';
 
 
 
@@ -72,6 +73,7 @@ function App() {
             <Route path="/forgotpassword" element={<ForgottenPassword />} />
             <Route path="/password/resetpassword/:id/:token" element={<PasswordReset />} />
             <Route path="/report" element={<Test/>} />
+            <Route path="/downloadhistory" element={<History/>} />
             
 
           </Routes>

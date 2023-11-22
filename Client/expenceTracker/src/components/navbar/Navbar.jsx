@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useLogin } from '../context/userContext';
+import JsFileDownloader from 'js-file-downloader';
 
 function Navbar() {
   const { user, setUser, Logout } = useLogin()
@@ -47,7 +48,30 @@ function Navbar() {
     })
 
   }
- 
+  const handleDownload = async () => {
+    try {
+      const token = localStorage.getItem('token')
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/expence/download`, { headers: { Authorization: token } })
+      console.log(response.data.fileUrl.Location);
+      const fileUrl = response.data.fileUrl.Location;
+
+      new JsFileDownloader({
+        url: fileUrl
+      })
+        .then(function () {
+          alert('download successfully')
+          // Called when download ended
+        })
+        .catch(function (error) {
+          alert(error)
+          // Called when an error occurred
+        });
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
 
   return (
     <div>
@@ -84,10 +108,15 @@ function Navbar() {
                 Report
               </Link>
             </li>
+            <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
+              <Link to='/downloadhistory'>
+                Download History
+              </Link>
+            </li>
           </ul>
         </div>
         {user.isLoggedIn && <div className='text-violet-600 text-xl'>hello, {user.name} !</div>}
-        
+
         <div>
           {!user.isLoggedIn ?
             <div>
@@ -101,30 +130,30 @@ function Navbar() {
             </div>
             :
             <div>
-              
+
               <div>
-              
-              {!user.isPremium ?
-                <button onClick={handlePurchase} className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>
-                  <Link to='#'>
-                    Buy Premium
-                  </Link>
 
-                </button> :
-                <div>
-                <button className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Premium User</button>
-                <button className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Download Report</button>
-                </div>
-                
-              }
+                {!user.isPremium ?
+                  <button onClick={handlePurchase} className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>
+                    <Link to='#'>
+                      Buy Premium
+                    </Link>
 
-              <button onClick={() => {
-                Logout()
-                localStorage.removeItem('token')
-                navigate('/')
-              }} className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Logout</button>
+                  </button> :
+                  <div>
+                    <button className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Premium User</button>
+                    <button onClick={handleDownload} className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Download Report</button>
+                  </div>
+
+                }
+
+                <button onClick={() => {
+                  Logout()
+                  localStorage.removeItem('token')
+                  navigate('/')
+                }} className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Logout</button>
               </div>
-             
+
             </div>
 
           }

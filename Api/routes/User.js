@@ -11,4 +11,5 @@ router.post('/signin',userController.signin)
 router.get("/:email",userController.getUser)
 router.get("/",userAuthentication,userController.getUserInfo)
 
+
 module.exports=router;

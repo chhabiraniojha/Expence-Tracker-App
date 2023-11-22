@@ -11,6 +11,7 @@ const Users=require('./models/User')
 const Expence=require('./models/Expence')
 const Order=require('./models/Order');
 const ForgotPassword=require('./models/ForgotPassword')
+const ExpenceReport=require('./models/ExpenceReport')
 const cors=require('cors')
 
 
@@ -34,6 +35,9 @@ Order.belongsTo(Users)
 
 Users.hasMany(ForgotPassword)
 ForgotPassword.belongsTo(Users)
+
+Users.hasMany(ExpenceReport)
+ExpenceReport.belongsTo(Users)
 
 
 console.log('hello')

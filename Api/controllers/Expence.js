@@ -1,6 +1,8 @@
 const Expence = require('../models/Expence')
 const User = require('../models/User')
+const ExpenceReport=require('../models/ExpenceReport')
 const sequelize = require('../util/database')
+const AWS = require('aws-sdk')
 
 exports.addExpence = async (req, res, next) => {
   const { expenceAmount, expenceDescription, expenceCategory } = req.body;
@@ -87,13 +89,79 @@ exports.getPaginatedExpence = async (req, res, next) => {
       userId: id
     }
   });
-  const expence=await Expence.findAll({
-    where:{
-      userId:id
+  const expence = await Expence.findAll({
+    where: {
+      userId: id
     },
-    offset:(page)*pageLimit,
-    limit:pageLimit
-    
+    offset: (page) * pageLimit,
+    limit: pageLimit
+
   })
-  res.json({expence,count})
+  res.json({ expence, count })
 }
+
+
+const uploadToS3 = (data, fileName) => {
+  const BUCKET_NAME = process.env.BUCKET_NAME;
+  const IAM_USER_KEY = process.env.IAM_USER_KEY;
+  const IAM_USER_SECRET_KEY = process.env.IAM_USER_SECRET_KEY;
+
+  const s3 = new AWS.S3({
+    accessKeyId: IAM_USER_KEY,
+    secretAccessKey: IAM_USER_SECRET_KEY,
+  });
+  const params = {
+		Bucket: BUCKET_NAME,
+		Key: fileName,
+		Body: data
+	};
+  return new Promise((resolve, reject) => {
+		s3.upload(params, (err, data) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve(data);
+			}
+		});
+	});
+
+
+}
+exports.downloadExpences = async (req, res, next) => {
+  try {
+    const expences = await Expence.findAll({
+      where: {
+        userId: req.user.id
+      }
+    })
+    const stringifiedExpences = JSON.stringify(expences)
+    const fileName = `Expenses_${req.user.id}_${new Date().getTime()}`;
+    const fileUrl = await uploadToS3(stringifiedExpences, fileName);
+    await ExpenceReport.create({
+			expenceUrl: fileUrl.Location,
+			userId: req.user.id,
+		});
+
+    res.status(200).json({ fileUrl, success: true });
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ success: false });
+
+  }
+  
+}
+
+
+exports.showReports = async (req, res) => {
+	try {
+		const reports = await ExpenceReport.findAll({
+      where:{
+          userId:req.user.id
+    }});
+		res.status(200).json({ success: true, message: "Successfully retrieved files", response: reports });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ success: false });
+	}
+};
