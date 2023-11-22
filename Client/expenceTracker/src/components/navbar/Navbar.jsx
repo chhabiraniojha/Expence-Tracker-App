@@ -111,7 +111,11 @@ function Navbar() {
                   </Link>
 
                 </button> :
+                <div>
                 <button className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Premium User</button>
+                <button className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Download Report</button>
+                </div>
+                
               }
 
               <button onClick={() => {
