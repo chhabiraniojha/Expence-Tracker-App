@@ -1,4 +1,5 @@
 const express=require('express');
+const helmet =require('helmet')
 require('dotenv').config()
 const bodyParser=require('body-parser')
 const userRoute=require('./routes/User')
@@ -17,6 +18,7 @@ const cors=require('cors')
 
 
 const app=express();
+app.use(helmet());
 app.use(bodyParser.json({extended:false}));
 app.use(cors())
 

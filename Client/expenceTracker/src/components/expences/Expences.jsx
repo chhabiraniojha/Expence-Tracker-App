@@ -69,76 +69,59 @@ function Expences() {
                 <div>
                     {/* expences */}
                     <ExpenceForm />
-                    <div className='first_table w-full pt-6'>
-                        <table className='p-4' >
-                            <tr>
-                                <th className='p-2'>Data</th>
-                                <th className='p-2'>Description</th>
-                                <th className='p-2'>Category</th>
-                                <th className='p-2'>Income</th>
-                                <th className='p-2'>Expense</th>
-                                <th className='p-2'>Action</th>
-                            </tr>
-                            {expences.map((expence) => {
-                                return (
 
-                                    <tr key={expence.id}>
-                                        <td className='td p-2'>{new Date(expence.createdAt).toDateString()}</td>
-                                        <td className='td p-2'>{expence.expenceDescription}</td>
-                                        <td className='td p-2'>{expence.expenceCategory}</td>
-                                        <td className='td'></td>
-                                        <td className='td p-2'>{expence.expenceAmount}</td>
-                                        <td>
-                                            <div className='text-center'>
-                                                <button  onClick={(e)=>removeExpence(expence.id)} className=' bg-red-700 px-2 rounded-md text-white'>
-                                                    Delete
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                )
+                    {
+                        expences.length > 0 ?
+                            <div>
+                                <div className='first_table w-full pt-6'>
+                                    <table className='p-4' >
+                                        <tr>
+                                            <th className='p-2'>Data</th>
+                                            <th className='p-2'>Description</th>
+                                            <th className='p-2'>Category</th>
+                                            <th className='p-2'>Income</th>
+                                            <th className='p-2'>Expense</th>
+                                            <th className='p-2'>Action</th>
+                                        </tr>
+                                        {expences.map((expence) => {
+                                            return (
 
-                            })}
-                        </table>
-                    </div>
-                    <div className='container'>
-                        <div className='w-full text-center p-4'>
-                            <label className='text-lg px-2'>Limit Per Page</label>
-                            <select className='border-2 border-gray-700 px-2 text-blue-800' onChange={handleLimit}>
-                                <option value={5}>5</option>
-                                <option value={8} selected>8</option>
-                                <option value={12}>12</option>
-                                <option value={15}>15</option>
-                                <option value={29}>20</option>
-                            </select>
-                        </div>
-                        <div >
-                            {/* <Items currentItems={currentItems} /> */}
-                            <ReactPaginate
-                                previousLabel="previous"
-                                nextLabel="next"
-                                breakLabel="..."
-                                breakClassName="page-item"
-                                breakLinkClassName="page-link"
-                                pageCount={pageCount}
-                                pageRangeDisplayed={8}
-                                marginPagesDisplayed={2}
-                                onPageChange={handlePageClick}
-                                containerClassName="pagination justify-content-center"
-                                pageClassName="page-item"
-                                pageLinkClassName="page-link"
-                                previousClassName="page-item"
-                                previousLinkClassName="page-link"
-                                nextClassName="page-item"
-                                nextLinkClassName="page-link"
-                                activeClassName="active"
-                                forcePage={currentPage.current}
-                            // eslint-disable-next-line no-unused-vars
+                                                <tr key={expence.id}>
+                                                    <td className='td p-2'>{new Date(expence.createdAt).toDateString()}</td>
+                                                    <td className='td p-2'>{expence.expenceDescription}</td>
+                                                    <td className='td p-2'>{expence.expenceCategory}</td>
+                                                    <td className='td'></td>
+                                                    <td className='td p-2'>{expence.expenceAmount}</td>
+                                                    <td>
+                                                        <div className='text-center'>
+                                                            <button onClick={(e) => removeExpence(expence.id)} className=' bg-red-700 px-2 rounded-md text-white'>
+                                                                Delete
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )
 
+                                        })}
+                                    </table>
+                                </div>
+                                <div className='container'>
+                                    <div className='w-full text-center p-4'>
+                                        <label className='text-lg px-2'>Limit Per Page</label>
+                                        <select className='border-2 border-gray-700 px-2 text-blue-800' onChange={handleLimit}>
+                                            <option value={5}>5</option>
+                                            <option value={8} selected>8</option>
+                                            <option value={12}>12</option>
+                                            <option value={15}>15</option>
+                                            <option value={29}>20</option>
+                                        </select>
+                                    </div>
 
-                            />
-                        </div>
-                    </div>
+                                </div>
+                            </div> :
+                            <div className='text-4xl font-bold text-slate-700 h-screen flex flex-col items-center justify-center'>You have no Expence</div>
+                    }
+
                 </div>
             </div>
         </ExpenceProvider>
@@ -146,3 +129,4 @@ function Expences() {
 }
 
 export default Expences
+

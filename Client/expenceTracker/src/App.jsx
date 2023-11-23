@@ -32,7 +32,7 @@ function App() {
 
   const Logout = useCallback(() => {
     setUser(prev => (
-      { ...prev, isLoggedIn: !prev.isLoggedIn }
+      { ...prev, isLoggedIn: !prev.isLoggedIn,isPremium:false }
     ))
   }, [])
 
@@ -61,7 +61,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/contactus" element={<Home />} />
+            {/* <Route path="/contactus" element={<Home />} /> */}
 
             {/* // <ProtectedRoute user={user.isLoggedIn:}>
               //   <Expences />
@@ -69,11 +69,11 @@ function App() {
             <Route path="/signin" element={!user.isLoggedIn ? <Signin /> : <Navigate to="/" />} />
             <Route path="/expences" element={user.isLoggedIn ? <Expences /> : <Signin/>} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/leaderboard" element={<LeaderBoard />} />
+            <Route path="/leaderboard" element={user.isLoggedIn?<LeaderBoard />:<Signin />} />
             <Route path="/forgotpassword" element={<ForgottenPassword />} />
             <Route path="/password/resetpassword/:id/:token" element={<PasswordReset />} />
-            <Route path="/report" element={<Test/>} />
-            <Route path="/downloadhistory" element={<History/>} />
+            <Route path="/report" element={user.isLoggedIn?<Test/>:<Signin/>} />
+            <Route path="/downloadhistory" element={user.isLoggedIn?<History/>:<Signin/>} />
             
 
           </Routes>

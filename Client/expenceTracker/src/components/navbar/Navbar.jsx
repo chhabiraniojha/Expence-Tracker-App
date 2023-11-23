@@ -74,9 +74,8 @@ function Navbar() {
 
 
   return (
-    <div>
-      <div className='bg-yellow-400 w-full h-14 justify-between flex px-4 md:px-8
-       pt-4'>
+    <div className=''>
+      <div className=' bg-yellow-400 w-full h-14 justify-between flex px-4 md:px-8 pt-3'>
         <div className='font-bold text-md'>
           Expence Tracker
         </div>
@@ -88,31 +87,38 @@ function Navbar() {
                 Home
               </Link>
             </li>
-            <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
+            {/* <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
               <Link to='/contactus'>
                 Contact Us
               </Link>
-            </li>
+            </li> */}
             <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
               <Link to='/expences'>
                 Expence
               </Link>
             </li>
-            <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
-              <Link to='/leaderboard'>
-                LeaderBoard
-              </Link>
-            </li>
-            <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
-              <Link to='/report'>
-                Report
-              </Link>
-            </li>
-            <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
-              <Link to='/downloadhistory'>
-                Download History
-              </Link>
-            </li>
+            {user.isLoggedIn &&
+              <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
+                <Link to='/leaderboard'>
+                  LeaderBoard
+                </Link>
+              </li>
+            }
+
+            {user.isLoggedIn &&
+              <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
+                <Link to='/report'>
+                  Report
+                </Link>
+              </li>
+            }
+            {user.isLoggedIn &&
+              <li className='font-serif text-md text-blue-500 font-bold cursor-pointer px-1 hover:text-red-500 underline md:px-4'>
+                <Link to='/downloadhistory'>
+                  Download History
+                </Link>
+              </li>
+            }
           </ul>
         </div>
         {user.isLoggedIn && <div className='text-violet-600 text-xl'>hello, {user.name} !</div>}
@@ -131,7 +137,7 @@ function Navbar() {
             :
             <div>
 
-              <div>
+              <div className='flex flex-row'>
 
                 {!user.isPremium ?
                   <button onClick={handlePurchase} className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>
@@ -142,7 +148,7 @@ function Navbar() {
                   </button> :
                   <div>
                     <button className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Premium User</button>
-                    <button onClick={handleDownload} className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Download Report</button>
+                    <button onClick={handleDownload} className='bg-blue-300 px-4 mx-2 py-1 rounded-md font-bold'>Download</button>
                   </div>
 
                 }

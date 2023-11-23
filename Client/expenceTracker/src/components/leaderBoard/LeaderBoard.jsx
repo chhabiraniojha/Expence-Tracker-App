@@ -45,7 +45,8 @@ function LeaderBoard() {
             />
           </div>
 
-        </div> : <div>You are not a premium user</div>
+        </div> :
+        <div className='text-4xl font-bold text-slate-700 h-screen flex flex-col items-center justify-center'>this is a premium feature please take premium</div>
       }
 
     </div>
