@@ -14,7 +14,6 @@ const Order=require('./models/Order');
 const ForgotPassword=require('./models/ForgotPassword')
 const ExpenceReport=require('./models/ExpenceReport')
 const cors=require('cors')
-const path = require('path')
 
 
 
@@ -24,11 +23,7 @@ app.use(bodyParser.json({extended:false}));
 app.use(cors())
 
 
-app.use(express.static(path.resolve(__dirname, 'dist')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
-});
 
 app.use("/users",userRoute)
 app.use("/expence",expenceRoute)
