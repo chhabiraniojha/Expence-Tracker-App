@@ -13,5 +13,8 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
+  },
+  alias: {
+    '/@': path.resolve(__dirname, 'src'),
   }
 })
