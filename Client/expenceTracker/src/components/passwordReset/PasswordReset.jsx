@@ -15,6 +15,8 @@ function PasswordReset() {
                 if(response.status==201){
                     setPassword("")
                     setMessage(response.data.message)
+                    alert("pasword successfully changed")
+                    navigate('/signin')
                     console.log(response)
                 }
              } catch (error) {

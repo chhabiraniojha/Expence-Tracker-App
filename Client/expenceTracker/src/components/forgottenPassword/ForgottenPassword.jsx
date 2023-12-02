@@ -6,11 +6,16 @@ function ForgottenPassword() {
 
     const handleSubmit=async (e)=>{
         e.preventDefault();
-        const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/password/forgotpassword`,{email})
+        try {
+            const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/password/forgotpassword`,{email})
         if(response.status==200){
             setEmail('')
             setMessage(response.data.message)
         }
+        } catch (error) {
+            console.log(error)
+        }
+        
 
     }
     return (

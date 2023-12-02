@@ -60,7 +60,7 @@ function App() {
         <LoginProvider value={{ user, setUser, Login, Logout }}>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Signin/>} />
             {/* <Route path="/contactus" element={<Home />} /> */}
 
             {/* // <ProtectedRoute user={user.isLoggedIn:}>
